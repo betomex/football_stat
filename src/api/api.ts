@@ -9,6 +9,10 @@ export const instance = axios.create({
 
 export const footballAPI = {
   getLeagues() {
-    return instance.get(`competitions/`).then(r => r.data);
+    return instance.get(`competitions`).then(r => r.data.competitions);
+  },
+  getTeams() {
+    const areas = [2032, 2072, 2077, 2081, 2088, 2144, 2163, 2187, 2220, 2224, 2267]
+    return instance.get(`teams/?areas=${areas}`).then(r => r.data.teams);
   }
 }

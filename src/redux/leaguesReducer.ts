@@ -6,7 +6,7 @@ type actionsType = inferActionsTypes<typeof actions>
 type thunkType = baseThunkType<actionsType>
 
 let initialState = {
-  leagues: [] as Array<leagueType>
+  leagues: [] as Array<leagueType> | null
 };
 
 const leaguesReducer = (state = initialState, action: actionsType) => {

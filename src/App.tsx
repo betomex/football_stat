@@ -3,6 +3,7 @@ import './App.css';
 import Navbar from "./components/Navbar/Navbar";
 import {Route} from "react-router-dom";
 import LeaguesContainer from "./components/Leagues/LeaguesContainer";
+import TeamsContainer from "./components/Teams/TeamsContainer";
 
 class App extends React.Component {
   render() {
@@ -13,7 +14,7 @@ class App extends React.Component {
           <LeaguesContainer/>
         }/>
         <Route exact path="/teams" render={() =>
-          <div>teams</div>
+          <TeamsContainer/>
         }/>
         <Route exact path="/league_calendar" render={() =>
           <div>league_calendar</div>
