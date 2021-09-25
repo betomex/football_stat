@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import Navbar from "./components/Navbar/Navbar";
 import {Route} from "react-router-dom";
+import LeaguesContainer from "./components/Leagues/LeaguesContainer";
 
 class App extends React.Component {
   render() {
@@ -9,7 +10,7 @@ class App extends React.Component {
       <Navbar/>
       <div className="App-header">
         <Route exact path="/leagues" render={() =>
-          <div>leagues</div>
+          <LeaguesContainer/>
         }/>
         <Route exact path="/teams" render={() =>
           <div>teams</div>
