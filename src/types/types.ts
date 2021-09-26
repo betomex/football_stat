@@ -48,12 +48,7 @@ type matchType = {
     id: number
     name: string
   }
-  score: {
-    extraTime: goalsType
-    fullTime: goalsType
-    halfTime: goalsType
-    penalties: goalsType
-  }
+  score: goalsType
   group: string
   id: number
   stage: string
@@ -79,15 +74,27 @@ export type teamMatchesType = {
     id: number
     name: string
   }
-  score: {
-    winner: string
-  }
+  score: goalsType
   id: number
   status: string
   utcDate: string
 }
 
 type goalsType = {
-  homeTeam: number | null
-  awayTeam: number | null
+  extraTime: {
+    homeTeam: number | null
+    awayTeam: number | null
+  }
+  fullTime: {
+    homeTeam: number | null
+    awayTeam: number | null
+  }
+  halfTime: {
+    homeTeam: number | null
+    awayTeam: number | null
+  }
+  penalties: {
+    homeTeam: number | null
+    awayTeam: number | null
+  }
 }

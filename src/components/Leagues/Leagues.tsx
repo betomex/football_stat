@@ -2,7 +2,6 @@ import React, {useState} from "react";
 import {leagueType} from "../../types/types";
 import LeagueCard from "./LeagueCard/LeagueCard";
 import {Box, Grid, TextField} from '@material-ui/core';
-import './Leagues.css'
 
 type propsType = {
   leagues: Array<leagueType>

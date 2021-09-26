@@ -40,7 +40,7 @@ const Leagues: React.FC<propsType> = ({matches}) => {
   }
 
   return <Box sx={{padding: "50px"}}>
-    <div className={"h1withDate"}>
+    <div className={"h1withLeagueDate"}>
       <h1>{competitionName} Calendar</h1>
       <DatePicker onChange={(date: Date) => {
         onDateFromChange(date)
