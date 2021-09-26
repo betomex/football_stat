@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 
 const Navbar: React.FC = () => {
   return <Box sx={{flexGrow: 1}}>
-    <AppBar position="absolute" color={"default"}>
+    <AppBar position="fixed" color={"default"}>
       <Toolbar>
         <Stack spacing={2} direction={"row"}>
           <Button variant="outlined" color={"warning"} component={Link} to="/leagues">Лиги/Соревнования</Button>

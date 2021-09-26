@@ -3,11 +3,13 @@ import leaguesReducer from "./leaguesReducer";
 import thunkMiddleWare, { ThunkAction } from 'redux-thunk';
 import teamsReducer from "./teamsReducer";
 import leagueCalendarReducer from "./leagueCalendarReducer";
+import teamCalendarReducer from "./teamCalendarReducer";
 
 let rootReducer = combineReducers({
   leaguesPage: leaguesReducer,
   teamsPage: teamsReducer,
-  leagueCalendar: leagueCalendarReducer
+  leagueCalendar: leagueCalendarReducer,
+  teamCalendar: teamCalendarReducer
 });
 
 type rootReducerType = typeof rootReducer //global state

@@ -1,0 +1,15 @@
+.team-matches-page {
+    padding-top: 50px;
+    background-color: #724c66;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: #ffffff;
+    min-width: 1000px;
+}
+
+.imgTeamMatchLogo {
+    width: 50px;
+}

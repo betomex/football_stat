@@ -7,7 +7,6 @@ type propsType = {
 }
 
 const Leagues: React.FC<propsType> = ({matches, ...props}) => {
-  console.log(matches)
   let competitionName = null
   let pageData = null
   if (matches) {

@@ -56,3 +56,29 @@ type matchType = {
   stage: string
   utcDate: string
 }
+
+export type teamMatchesType = {
+  competition: {
+    area: {
+      id: number
+      name: string
+      ensignUrl: string
+    }
+    id: number
+    name: string
+  }
+  homeTeam: {
+    id: number
+    name: string
+  }
+  awayTeam: {
+    id: number
+    name: string
+  }
+  score: {
+    winner: string
+  }
+  id: number
+  status: string
+  utcDate: string
+}
