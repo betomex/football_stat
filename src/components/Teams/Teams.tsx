@@ -1,26 +1,34 @@
-import React from "react";
-import './Teams.css'
+import React, {useState} from "react";
 import {teamType} from "../../types/types";
+import {Box, Grid, TextField} from "@material-ui/core";
+import TeamCard from "./TeamCard/TeamCard";
 
 type propsType = {
   teams: Array<teamType>
 }
 
 const Teams: React.FC<propsType> = ({teams, ...props}) => {
-  const teamsNames = teams.map(t => {
-    if (t.crestUrl) {
-      return <div key={t.id}>
-        <img alt={"someTeam"} src={t.crestUrl} className={"imgTeamLogo"}/>
-        <p>{t.name}</p>
-      </div>
-    }
-    return <p key={t.id}>{t.name}</p>
+  const [team, setTeam] = useState('')
+
+  const filteredTeams = teams.filter(t => {
+    return t.name.toLowerCase().includes(team.toLowerCase())
   })
 
-  return <div className={"teams-page"}>
+  const teamsData = filteredTeams.map(t => <Grid item key={t.id}>
+    <TeamCard areaName={t.area.name} founded={t.founded} crestUrl={t.crestUrl} teamName={t.name}/>
+  </Grid>)
+
+  return <Box sx={{padding: "50px"}}>
     <h1>TEAMS</h1>
-    {teamsNames}
-  </div>
+    <TextField id="outlined-basic" label="Search Team..." variant="outlined" color={"warning"}
+               sx={{marginBottom: "40px"}}
+               onChange={(e) => {
+                 setTeam(e.target.value)
+               }}/>
+    <Grid container spacing={2}>
+      {teamsData}
+    </Grid>
+  </Box>
 }
 
 export default Teams
