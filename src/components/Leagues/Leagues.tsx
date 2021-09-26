@@ -2,13 +2,14 @@ import React, {useState} from "react";
 import {leagueType} from "../../types/types";
 import LeagueCard from "./LeagueCard/LeagueCard";
 import {Box, Grid, TextField} from '@material-ui/core';
+import './Leagues.css'
 
 type propsType = {
   leagues: Array<leagueType>
 }
 
 const Leagues: React.FC<propsType> = ({leagues}) => {
-  const [league, setLeague] = useState('');
+  const [league, setLeague] = useState<string>('');
 
   const filterLeagues = leagues.filter(l => {
     return l.name.toLowerCase().includes(league.toLowerCase())
@@ -19,12 +20,15 @@ const Leagues: React.FC<propsType> = ({leagues}) => {
   </Grid>)
 
   return <Box sx={{padding: "50px"}}>
-    <h1>LEAGUES</h1>
-    <TextField id="outlined-basic" label="Search League..." variant="outlined" color={"warning"}
-               sx={{marginBottom: "40px"}}
-               onChange={(e) => {
-                 setLeague(e.target.value)
-               }}/>
+    <div className={"h1withSearch"}>
+      <h1>LEAGUES</h1>
+      <TextField id="outlined-basic" label="Search League..." variant="outlined" color={"warning"}
+                 sx={{marginBottom: "40px"}}
+                 onChange={(e) => {
+                   setLeague(e.target.value)
+                 }}/>
+    </div>
+
     <Grid container spacing={3}>
       {leaguesData}
     </Grid>

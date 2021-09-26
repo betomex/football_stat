@@ -8,7 +8,7 @@ type propsType = {
 }
 
 const Teams: React.FC<propsType> = ({teams, ...props}) => {
-  const [team, setTeam] = useState('')
+  const [team, setTeam] = useState<string>('')
 
   const filteredTeams = teams.filter(t => {
     return t.name.toLowerCase().includes(team.toLowerCase())
@@ -19,12 +19,14 @@ const Teams: React.FC<propsType> = ({teams, ...props}) => {
   </Grid>)
 
   return <Box sx={{padding: "50px"}}>
-    <h1>TEAMS</h1>
-    <TextField id="outlined-basic" label="Search Team..." variant="outlined" color={"warning"}
-               sx={{marginBottom: "40px"}}
-               onChange={(e) => {
-                 setTeam(e.target.value)
-               }}/>
+    <div className={"h1withSearch"}>
+      <h1>TEAMS</h1>
+      <TextField id="outlined-basic" label="Search Team..." variant="outlined" color={"warning"}
+                 sx={{marginBottom: "40px"}}
+                 onChange={(e) => {
+                   setTeam(e.target.value)
+                 }}/>
+    </div>
     <Grid container spacing={2}>
       {teamsData}
     </Grid>

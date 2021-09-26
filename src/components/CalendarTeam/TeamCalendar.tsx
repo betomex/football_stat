@@ -8,7 +8,6 @@ type propsType = {
 }
 
 const TeamsCalendar: React.FC<propsType> = ({teamMatches, teamID, ...props}) => {
-  console.log(teamMatches)
   let teamName = null
   let teamMatchesData = null
 

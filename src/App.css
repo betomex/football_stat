@@ -1,5 +1,6 @@
 .App-header {
-  background-color: #cbcbcb;
+  background-image: url(./assets/grassBackgroind.jpg);
+  background-attachment: fixed;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
