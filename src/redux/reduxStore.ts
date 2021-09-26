@@ -2,10 +2,12 @@ import {Action, applyMiddleware, combineReducers, createStore} from "redux";
 import leaguesReducer from "./leaguesReducer";
 import thunkMiddleWare, { ThunkAction } from 'redux-thunk';
 import teamsReducer from "./teamsReducer";
+import leagueCalendarReducer from "./leagueCalendarReducer";
 
 let rootReducer = combineReducers({
   leaguesPage: leaguesReducer,
-  teamsPage: teamsReducer
+  teamsPage: teamsReducer,
+  leagueCalendar: leagueCalendarReducer
 });
 
 type rootReducerType = typeof rootReducer //global state

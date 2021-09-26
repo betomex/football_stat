@@ -4,6 +4,7 @@ import Navbar from "./components/Navbar/Navbar";
 import {Route} from "react-router-dom";
 import LeaguesContainer from "./components/Leagues/LeaguesContainer";
 import TeamsContainer from "./components/Teams/TeamsContainer";
+import LeagueCalendarContainer from "./components/CalendarLeague/LeagueCalendarContainer";
 
 class App extends React.Component {
   render() {
@@ -17,7 +18,7 @@ class App extends React.Component {
           <TeamsContainer/>
         }/>
         <Route exact path="/league_calendar" render={() =>
-          <div>league_calendar</div>
+          <LeagueCalendarContainer/>
         }/>
         <Route exact path="/team_calendar" render={() =>
           <div>team_calendar</div>

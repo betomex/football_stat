@@ -14,7 +14,6 @@ export type leagueType = {
   emblemUrl: string
   id: number
   name: string
-  plan: string
 }
 
 export type teamType = {
@@ -26,4 +25,34 @@ export type teamType = {
   id: number
   name: string
   founded: number
+}
+
+export type leagueMatchesType = {
+  competition: {
+    area: {
+      id: number
+      name: string
+    }
+    id: number
+    name: string
+  }
+  matches: Array<matchType>
+}
+
+type matchType = {
+  homeTeam: {
+    id: number
+    name: string
+  }
+  awayTeam: {
+    id: number
+    name: string
+  }
+  score: {
+    winner: string
+  }
+  group: string
+  id: number
+  stage: string
+  utcDate: string
 }
