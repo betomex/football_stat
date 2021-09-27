@@ -5,12 +5,13 @@ import {Box, Grid, TextField} from '@material-ui/core';
 import '../../App.css';
 import {createBrowserHistory} from "history";
 import qs from "qs";
+import Preloader from "../../common/Preloader";
 
 type propsType = {
   leagues: Array<leagueType>
 }
 
-function Leagues({leagues}: propsType) {
+const Leagues: React.FC<propsType> = ({leagues}) => {
   const [league, setLeague] = useState('');
   const history = createBrowserHistory()
 
@@ -25,6 +26,10 @@ function Leagues({leagues}: propsType) {
   useEffect(() => {
     history.push(`?league=${league}`);
   }, [league]);
+
+  if (leagues.length === 0) {
+    return <Preloader/>
+  }
 
   const filterLeagues = leagues.filter(l => {
     return l.name.toLowerCase().includes(league.toLowerCase())
@@ -47,6 +52,6 @@ function Leagues({leagues}: propsType) {
       {leaguesData}
     </Grid>
   </Box>
-}
+};
 
 export default Leagues

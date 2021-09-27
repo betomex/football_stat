@@ -4,6 +4,7 @@ import {Box, Grid, TextField} from "@material-ui/core";
 import TeamCard from "./TeamCard/TeamCard";
 import {createBrowserHistory} from "history";
 import qs from "qs";
+import Preloader from "../../common/Preloader";
 
 type propsType = {
   teams: Array<teamType>
@@ -24,6 +25,10 @@ const Teams: React.FC<propsType> = ({teams}) => {
   useEffect(() => {
     history.push(`?team=${team}`);
   }, [team]);
+
+  if (teams.length === 0) {
+    return <Preloader/>
+  }
 
   const filteredTeams = teams.filter(t => {
     return t.name.toLowerCase().includes(team.toLowerCase())

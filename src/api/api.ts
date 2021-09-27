@@ -1,8 +1,10 @@
 import axios from "axios";
 
+let config = require('../env.json')
+
 export const instance = axios.create({
   headers: {
-    'X-Auth-Token': '653222211f444a6cb96255807df1e79d'
+    'X-Auth-Token': config.API_KEY
   },
   baseURL: 'http://api.football-data.org/v2/'
 });

@@ -5,6 +5,7 @@ import LeaguePaper from "./LeaguePaper/LeaguePaper";
 import DatePicker from 'react-date-picker';
 import {createBrowserHistory} from "history";
 import {getUrlParams} from "../../common/common";
+import Preloader from "../../common/Preloader";
 
 type propsType = {
   matches: leagueMatchesType
@@ -25,6 +26,10 @@ const Leagues: React.FC<propsType> = ({matches}) => {
     let preparedPush = `?dateFrom=${String(dateLeagueFrom).substr(4, 21)}&dateTo=${String(dateLeagueTo).substr(4, 21)}`
     history.push(preparedPush);
   }, [dateLeagueFrom, dateLeagueTo]);
+
+  if (!matches) {
+    return <Preloader/>
+  }
 
   const onDateFromChange = (date: Date) => {
     setDateLeagueFrom(date)

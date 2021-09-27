@@ -5,6 +5,7 @@ import DatePicker from "react-date-picker";
 import TeamPaper from "./TeamPaper/teamPaper";
 import {createBrowserHistory} from "history";
 import {getUrlParams} from "../../common/common";
+import Preloader from "../../common/Preloader";
 
 type propsType = {
   teamMatches: Array<teamMatchesType>
@@ -26,6 +27,10 @@ const TeamsCalendar: React.FC<propsType> = ({teamMatches, teamID}) => {
     let preparedPush = `?dateFrom=${String(dateTeamFrom).substr(4, 21)}&dateTo=${String(dateTeamTo).substr(4, 21)}`
     history.push(preparedPush);
   }, [dateTeamFrom, dateTeamTo]);
+
+  if (!teamMatches) {
+    return <Preloader/>
+  }
 
   const onDateFromChange = (date: Date) => {
     setDateTeamFrom(date)
