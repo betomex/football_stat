@@ -1,22 +1,36 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {leagueMatchesType} from "../../types/types";
 import {Box, Grid} from "@material-ui/core";
 import LeaguePaper from "./LeaguePaper/LeaguePaper";
 import DatePicker from 'react-date-picker';
+import {createBrowserHistory} from "history";
+import {getUrlParams} from "../../common/common";
 
 type propsType = {
   matches: leagueMatchesType
 }
 
 const Leagues: React.FC<propsType> = ({matches}) => {
-  const [valueFrom, setValueFrom] = useState<Date>(new Date("2011-01-01T12:00:00"));
-  const [valueTo, setValueTo] = useState<Date>(new Date("2024-01-01T12:00:00"));
+  const [dateLeagueFrom, setDateLeagueFrom] = useState<Date | null>(new Date("2011-01-01T12:00:00"));
+  const [dateLeagueTo, setDateLeagueTo] = useState<Date | null>(new Date("2024-01-01T12:00:00"));
+  const history = createBrowserHistory()
+
+  useEffect(() => {
+    const urlParams = getUrlParams()
+    setDateLeagueFrom(urlParams[0])
+    setDateLeagueTo(urlParams[1])
+  }, [])
+
+  useEffect(() => {
+    let preparedPush = `?dateFrom=${String(dateLeagueFrom).substr(4, 21)}&dateTo=${String(dateLeagueTo).substr(4, 21)}`
+    history.push(preparedPush);
+  }, [dateLeagueFrom, dateLeagueTo]);
 
   const onDateFromChange = (date: Date) => {
-    setValueFrom(date)
+    setDateLeagueFrom(date)
   }
   const onDateToChange = (date: Date) => {
-    setValueTo(date)
+    setDateLeagueTo(date)
   }
 
   let competitionName = null
@@ -24,7 +38,10 @@ const Leagues: React.FC<propsType> = ({matches}) => {
   if (matches) {
     const filteredMatches = matches.matches.filter(m => {
       let matchDate = new Date(m.utcDate).getTime()
-      return valueFrom.getTime() <= matchDate && matchDate <= valueTo.getTime()
+      if (dateLeagueFrom && dateLeagueTo) {
+        return dateLeagueFrom.getTime() <= matchDate && matchDate <= dateLeagueTo.getTime()
+      }
+      return true
     })
 
     competitionName = matches.competition.name
@@ -44,10 +61,10 @@ const Leagues: React.FC<propsType> = ({matches}) => {
       <h1>{competitionName} Calendar</h1>
       <DatePicker onChange={(date: Date) => {
         onDateFromChange(date)
-      }} value={valueFrom}/>
+      }} value={dateLeagueFrom}/>
       <DatePicker onChange={(date: Date) => {
         onDateToChange(date)
-      }} value={valueTo}/>
+      }} value={dateLeagueTo}/>
     </div>
     <Grid container spacing={2} direction="column">
       {pageData}

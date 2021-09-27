@@ -9,16 +9,16 @@ type propsType = {
   teamName: string
 }
 
-const TeamCard: React.FC<propsType> = ({areaName, founded, crestUrl, teamName, ...props}) => {
+const TeamCard: React.FC<propsType> = ({areaName, founded, crestUrl, teamName}) => {
   if (!crestUrl) crestUrl = leagueLogo
   return <div>
     <Card sx={{width: 210, maxHeight: 450}}>
       <CardMedia
         component="img"
-        height="190"
+        height="200"
         image={crestUrl}
         alt="someTeam"
-        sx={{padding: "10px", maxWidth: 190}}
+        sx={{padding: "10px", width: "90%", maxWidth: "190"}}
       />
       <CardContent sx={{height: 120}}>
         <Typography gutterBottom variant="h6" component="div">

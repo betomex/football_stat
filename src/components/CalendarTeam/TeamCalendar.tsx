@@ -1,8 +1,10 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {teamMatchesType} from "../../types/types";
 import {Box, Grid} from "@material-ui/core";
 import DatePicker from "react-date-picker";
 import TeamPaper from "./TeamPaper/teamPaper";
+import {createBrowserHistory} from "history";
+import {getUrlParams} from "../../common/common";
 
 type propsType = {
   teamMatches: Array<teamMatchesType>
@@ -10,14 +12,26 @@ type propsType = {
 }
 
 const TeamsCalendar: React.FC<propsType> = ({teamMatches, teamID}) => {
-  const [valueFrom, setValueFrom] = useState<Date>(new Date("2011-01-01T12:00:00"));
-  const [valueTo, setValueTo] = useState<Date>(new Date("2024-01-01T12:00:00"));
+  const [dateTeamFrom, setDateTeamFrom] = useState<Date | null>(new Date("2011-01-01T12:00:00"));
+  const [dateTeamTo, setDateTeamTo] = useState<Date | null>(new Date("2024-01-01T12:00:00"));
+  const history = createBrowserHistory()
+
+  useEffect(() => {
+    const urlParams = getUrlParams()
+    setDateTeamFrom(urlParams[0])
+    setDateTeamTo(urlParams[1])
+  }, [])
+
+  useEffect(() => {
+    let preparedPush = `?dateFrom=${String(dateTeamFrom).substr(4, 21)}&dateTo=${String(dateTeamTo).substr(4, 21)}`
+    history.push(preparedPush);
+  }, [dateTeamFrom, dateTeamTo]);
 
   const onDateFromChange = (date: Date) => {
-    setValueFrom(date)
+    setDateTeamFrom(date)
   }
   const onDateToChange = (date: Date) => {
-    setValueTo(date)
+    setDateTeamTo(date)
   }
 
   let teamName = null
@@ -25,9 +39,13 @@ const TeamsCalendar: React.FC<propsType> = ({teamMatches, teamID}) => {
 
   if (teamMatches) {
     teamName = teamMatches[0].awayTeam.id === teamID ? teamMatches[0].awayTeam.name : teamMatches[0].homeTeam.name
+
     const filteredTeamMatches = teamMatches.filter(tm => {
       let matchDate = new Date(tm.utcDate).getTime()
-      return valueFrom.getTime() <= matchDate && matchDate <= valueTo.getTime()
+      if (dateTeamFrom && dateTeamTo) {
+        return dateTeamFrom.getTime() <= matchDate && matchDate <= dateTeamTo.getTime()
+      }
+      return true
     })
 
     teamMatchesData = filteredTeamMatches.map(tm => {
@@ -47,10 +65,10 @@ const TeamsCalendar: React.FC<propsType> = ({teamMatches, teamID}) => {
       <h1>{teamName} Calendar</h1>
       <DatePicker onChange={(date: Date) => {
         onDateFromChange(date)
-      }} value={valueFrom}/>
+      }} value={dateTeamFrom}/>
       <DatePicker onChange={(date: Date) => {
         onDateToChange(date)
-      }} value={valueTo}/>
+      }} value={dateTeamTo}/>
     </div>
     <Grid container spacing={2} direction="column">
       {teamMatchesData}
