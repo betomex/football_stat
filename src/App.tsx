@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import Navbar from "./components/Navbar/Navbar";
-import {Route} from "react-router-dom";
+import {Redirect, Route} from "react-router-dom";
 import LeaguesContainer from "./components/Leagues/LeaguesContainer";
 import TeamsContainer from "./components/Teams/TeamsContainer";
 import LeagueCalendarContainer from "./components/CalendarLeague/LeagueCalendarContainer";
@@ -12,6 +12,7 @@ class App extends React.Component {
     return <div>
       <Navbar/>
       <div className="App-header">
+        <Redirect from={"/"} to={"/leagues"}/>
         <Route exact path="/leagues" render={() =>
           <LeaguesContainer/>
         }/>
